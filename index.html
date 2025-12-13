@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Educativa - Cursos y Certificados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Colores */
+        .bg-primary {
+            background-color: #000000;
+        }
+
+        .bg-accent {
+            background-color: #1e3a8a;
+        }
+
+        .text-primary {
+            color: #0f172a;
+        }
+
+        /* Efecto Blur Certificado */
+        .blur-overlay {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 8%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 4px;
+        }
+
+        /* Logos Convenios */
+        .partner-logo {
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* Form Select Styling */
+        select option {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 10px;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out;
+        }
+
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease-out;
+        }
+
+        .cart-notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="images/logo-new.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain logo-clean">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-bold text-gray-200">
+                <a href="index.html" class="hover:text-blue-400 transition">Inicio</a>
+                <a href="cursos.html" class="hover:text-blue-400 transition">Cursos</a>
+                <a href="nosotros.html" class="hover:text-blue-400 transition">Nosotros</a>
+                <a href="#registro" class="hover:text-blue-400 transition">Inscríbete</a>
+                <a href="#certificacion" class="hover:text-blue-400 transition">Certificación</a>
+            </nav>
+
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Search Bar - Hidden on mobile and tablet -->
+                <div class="hidden xl:flex bg-gray-800 rounded-full px-4 py-2 items-center border border-gray-700">
+                    <i class="fas fa-search text-gray-400 text-xs"></i>
+                    <input type="text" placeholder="¿Qué estás buscando?"
+                        class="bg-transparent border-none text-sm text-gray-200 focus:outline-none ml-2 w-48 placeholder-gray-500">
+                </div>
+
+                <!-- Login Button -->
+                <a href="login.html"
+                    class="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-lg">
+                    Mis cursos
+                </a>
+
+                <!-- Shopping Cart Icon -->
+                <a href="carrito.html" class="relative text-white hover:text-blue-400 transition">
+                    <i class="fas fa-shopping-cart text-xl sm:text-2xl"></i>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">
+                        0
+                    </span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="index.html" class="text-gray-200 hover:text-blue-400 transition py-2">Inicio</a>
+                <a href="cursos.html" class="text-gray-200 hover:text-blue-400 transition py-2">Cursos</a>
+                <a href="nosotros.html" class="text-gray-200 hover:text-blue-400 transition py-2">Nosotros</a>
+                <a href="#registro" class="text-gray-200 hover:text-blue-400 transition py-2"
+                    onclick="toggleMobileMenu()">Inscríbete</a>
+                <a href="#certificacion" class="text-gray-200 hover:text-blue-400 transition py-2"
+                    onclick="toggleMobileMenu()">Certificación</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="bg-primary text-white py-12 sm:py-16 md:py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-accent opacity-20 -skew-x-12 transform translate-x-20"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 relative z-10 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4 sm:mb-6">
+                    Capacítate y mejora tu <br class="hidden sm:block">
+                    <span class="text-blue-400">desempeño profesional</span>
+                </h1>
+                <p class="text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg mx-auto md:mx-0">
+                    Una plataforma de formación permanente, accesible y con el respaldo de las instituciones más
+                    importantes del país.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
+                    <a href="#cursos"
+                        class="bg-red-600 hover:bg-red-700 text-white px-6 sm:px-8 py-3 rounded shadow-lg font-semibold transition text-center">
+                        Ver Diplomados
+                    </a>
+                    <a href="#certificacion"
+                        class="border border-white hover:bg-white hover:text-primary text-white px-6 sm:px-8 py-3 rounded font-semibold transition text-center">
+                        Validar Certificado
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center mt-8 md:mt-0">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Estudiantes"
+                    class="rounded-lg shadow-2xl w-full sm:w-3/4 object-cover h-64 sm:h-80 opacity-90">
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 w-full overflow-hidden leading-[0]">
+            <svg class="relative block w-full h-[30px] sm:h-[50px]" data-name="Layer 1"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h3 class="text-center text-xs font-bold tracking-widest text-red-600 uppercase mb-8">Nuestros Convenios
+                Institucionales</h3>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <img src="images/convenio1.png" class="partner-logo h-12 md:h-16 object-contain" alt="Convenio">
+                <img src="images/convenio2.jpg" class="partner-logo h-12 md:h-16 object-contain" alt="CIP">
+                <img src="images/convenio3.png" class="partner-logo h-12 md:h-16 object-contain" alt="CPAP">
+                <img src="images/convenio4.png" class="partner-logo h-12 md:h-16 object-contain" alt="CPPe">
+                <img src="images/convenio5.png" class="partner-logo h-12 md:h-16 object-contain" alt="CEP">
+            </div>
+        </div>
+    </section>
+
+    <section id="certificacion" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2 relative group">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div class="relative bg-white p-2 rounded-lg shadow-xl">
+                        <img src="images/certificado-original.jpg" alt="Certificado" class="w-full h-auto rounded">
+                        <div class="blur-overlay flex items-center justify-center">
+                            <span class="text-xs text-gray-500 font-semibold">[Nombre del Alumno]</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Respaldo Académico</span>
+                    <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-6">Certificación con <span
+                            class="text-primary underline decoration-red-500">Validez Nacional</span></h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Todos nuestros programas académicos cuentan con el respaldo de colegios profesionales y
+                        entidades gubernamentales.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-700"><i
+                                class="fas fa-check-circle text-green-500 mr-3"></i> Válido para concursos públicos.
+                        </li>
+                        <li class="flex items-center text-gray-700"><i
+                                class="fas fa-check-circle text-green-500 mr-3"></i> Firmas legalizadas.</li>
+                        <li class="flex items-center text-gray-700"><i
+                                class="fas fa-check-circle text-green-500 mr-3"></i> Envío a todo el Perú.</li>
+                    </ul>
+                    <button
+                        class="bg-primary text-white px-6 py-3 rounded hover:bg-gray-800 transition shadow-md">Verificar
+                        Certificado</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cursos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Nuestros Diplomados y Cursos</h2>
+                <p class="text-gray-500 mt-2">Capacitación continua con los mejores expertos</p>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative">
+                <div class="carousel-container overflow-hidden" id="cursosCarousel">
+                    <div class="carousel-track flex transition-transform duration-500 ease-in-out">
+                        <!-- Curso 1 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="Derecho" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                                        VIVO</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Diplomado</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Gestión Pública y Derecho
+                                        Administrativo</h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i> 15
+                                            Dic</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso 2 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="Psicología" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Curso</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Psicología Forense y Criminalística
+                                    </h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i>
+                                            Inmediato</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso 3 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="RRHH" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                                        VIVO</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Diplomado</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Recursos Humanos y Ley del Servicio
+                                        Civil</h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i> 20
+                                            Dic</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso 4 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="Derecho Penal" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Diplomado</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Derecho Penal y Procesal Penal</h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i>
+                                            Inmediato</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso 5 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="Derecho Laboral" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                                        VIVO</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Curso</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Derecho Laboral y Seguridad Social
+                                    </h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i> 22
+                                            Dic</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso 6 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div
+                                class="bg-white rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden border border-gray-100 flex flex-col h-full">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                        alt="Derecho Familia" class="w-full h-48 object-cover">
+                                    <span
+                                        class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                                </div>
+                                <div class="p-6 flex-1 flex flex-col">
+                                    <span class="text-xs text-blue-600 font-bold uppercase mb-2">Diplomado</span>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-4">Derecho de Familia y Sucesiones
+                                    </h3>
+                                    <div class="mt-auto flex justify-between items-center">
+                                        <span class="text-sm text-gray-500"><i class="far fa-calendar-alt"></i>
+                                            Inmediato</span>
+                                        <a href="cursos.html" class="text-red-600 font-bold text-sm hover:underline">Ver
+                                            detalles</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination Dots -->
+                <div class="flex justify-center gap-2 mt-8" id="cursosDots"></div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="cursos.html"
+                    class="border border-primary text-primary px-8 py-3 rounded hover:bg-primary hover:text-white transition duration-300 font-medium inline-block">
+                    Explorar todos los cursos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section id="registro"
+        class="py-20 bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <span
+                    class="inline-block bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4">
+                    Inscríbete Ahora
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Listo para dar el siguiente paso?</h2>
+                <p class="text-gray-200 text-lg max-w-2xl mx-auto">
+                    Completa el formulario y nos pondremos en contacto contigo para brindarte más información sobre el
+                    curso de tu interés.
+                </p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-8 md:p-12">
+                    <form id="registrationForm" class="space-y-6">
+                        <!-- Course Selection -->
+                        <div class="form-group">
+                            <label for="curso" class="block text-sm font-semibold mb-2 text-white">
+                                <i class="fas fa-graduation-cap mr-2"></i>Escribe o selecciona el curso de tu interés
+                            </label>
+                            <input type="text" id="curso" name="curso" required list="cursos-list"
+                                placeholder="Escribe o selecciona un curso..."
+                                class="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition">
+                            <datalist id="cursos-list">
+                                <option value="Gestión Pública y Derecho Administrativo">
+                                <option value="Psicología Forense y Criminalística">
+                                <option value="Recursos Humanos y Ley del Servicio Civil">
+                                <option value="Derecho Penal y Procesal Penal">
+                                <option value="Derecho de Familia y Sucesiones">
+                                <option value="Criminalística Avanzada">
+                                <option value="Derecho Laboral y Seguridad Social">
+                                <option value="Derecho Civil y Contratos">
+                                <option value="Derecho Constitucional y Derechos Humanos">
+                                <option value="Gestión de Proyectos Públicos">
+                                <option value="Contrataciones del Estado">
+                                <option value="Perfilación Criminal">
+                            </datalist>
+                        </div>
+
+                        <!-- Name Field -->
+                        <div class="form-group">
+                            <label for="nombre" class="block text-sm font-semibold mb-2 text-white">
+                                <i class="fas fa-user mr-2"></i>Nombre completo
+                            </label>
+                            <input type="text" id="nombre" name="nombre" required
+                                placeholder="Ingresa tu nombre completo"
+                                class="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition">
+                        </div>
+
+                        <!-- Phone Field -->
+                        <div class="form-group">
+                            <label for="telefono" class="block text-sm font-semibold mb-2 text-white">
+                                <i class="fas fa-phone mr-2"></i>Número telefónico
+                            </label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="+51 999 999 999"
+                                pattern="[+]?[0-9\s]+"
+                                class="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition">
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="email" class="block text-sm font-semibold mb-2 text-white">
+                                <i class="fas fa-envelope mr-2"></i>Correo electrónico
+                            </label>
+                            <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com"
+                                class="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="pt-4">
+                            <button type="submit"
+                                class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-8 rounded-lg shadow-lg transform transition hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                Enviar solicitud
+                            </button>
+                        </div>
+
+                        <!-- Info Message -->
+                        <div class="mt-6 p-4 bg-blue-500/20 border border-blue-400/30 rounded-lg">
+                            <p class="text-sm text-center text-gray-200">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Nos pondremos en contacto contigo en un plazo máximo de 24 horas.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Success Message (Hidden by default) -->
+                <div id="successMessage"
+                    class="hidden mt-8 bg-green-500/20 border-2 border-green-400 rounded-xl p-6 text-center animate-fade-in">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">¡Solicitud enviada con éxito!</h3>
+                    <p class="text-gray-200">Gracias por tu interés. Pronto nos pondremos en contacto contigo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="docentes" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Nuestros Docentes</h2>
+                <p class="text-gray-500 mt-2">Aprende de los mejores profesionales de las principales universidades</p>
+            </div>
+
+            <!-- Carousel Container -->
+            <div class="relative">
+                <div class="carousel-container overflow-hidden" id="docentesCarousel">
+                    <div class="carousel-track flex transition-transform duration-500 ease-in-out">
+                        <!-- Docente 1 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 1"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dr. Ricardo Méndez</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Derecho Penal
+                                </p>
+                                <p class="text-sm text-gray-500">Catedrático de la UNMSM y Fiscal Superior.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 2 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 2"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dra. Carmen Solís</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Gestión Pública
+                                </p>
+                                <p class="text-sm text-gray-500">Docente Postgrado PUCP y Consultora del Estado.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 3 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 3"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Mg. Jorge Alva</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Criminalística
+                                </p>
+                                <p class="text-sm text-gray-500">Perito Forense y Docente en la USMP.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 4 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 4"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dra. Ana Torres</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Derecho de
+                                    Familia</p>
+                                <p class="text-sm text-gray-500">Abogada Litigante y Docente UNFV.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 5 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 5"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dr. Luis Vargas</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Derecho Laboral
+                                </p>
+                                <p class="text-sm text-gray-500">Especialista en Derecho del Trabajo, UNMSM.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 6 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 6"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Mg. Patricia Ramos</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Recursos Humanos
+                                </p>
+                                <p class="text-sm text-gray-500">Consultora en Gestión del Talento Humano.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 7 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 7"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dr. Carlos Ruiz</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Derecho Civil
+                                </p>
+                                <p class="text-sm text-gray-500">Docente Principal PUCP, Especialista en Contratos.</p>
+                            </div>
+                        </div>
+
+                        <!-- Docente 8 -->
+                        <div class="carousel-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-4">
+                            <div
+                                class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition h-full">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                                    alt="Docente 8"
+                                    class="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-blue-50">
+                                <h3 class="text-lg font-bold text-primary">Dra. María Fernández</h3>
+                                <p class="text-xs text-red-600 font-bold uppercase tracking-wider mb-2">Psicología
+                                    Forense</p>
+                                <p class="text-sm text-gray-500">Perito Psicóloga y Docente UNI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination Dots -->
+                <div class="flex justify-center gap-2 mt-8" id="docentesDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-2xl font-bold text-center text-primary mb-12">Nuestras Recomendaciones</h2>
+
+            <!-- Carousel Container -->
+            <div class="relative">
+                <div class="carousel-container overflow-hidden" id="recomendacionesCarousel">
+                    <div class="carousel-track flex transition-transform duration-500 ease-in-out">
+                        <!-- Recomendación 1 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"Excelente plataforma. Los certificados
+                                    llegaron puntuales a mi ciudad y me sirvieron para mi postulación. Recomendado
+                                    100%."</p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        JP</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Juan Pérez</p>
+                                        <p class="text-xs text-gray-500">Alumno de Derecho</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendación 2 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"La calidad de los docentes es muy alta.
+                                    Tomé el diplomado de Gestión Pública y aprendí muchísimo sobre la nueva normativa."
+                                </p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        MR</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Maria Rodriguez</p>
+                                        <p class="text-xs text-gray-500">Servidora Pública</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendación 3 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"Plataforma intuitiva y muy seria. El
+                                    soporte por WhatsApp siempre responde rápido mis dudas sobre los accesos."</p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        LG</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Luis Gomez</p>
+                                        <p class="text-xs text-gray-500">Ingeniero</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendación 4 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"Los cursos son muy completos y
+                                    actualizados. El material didáctico es de primera calidad. Muy satisfecho con mi
+                                    inversión."</p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        AC</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Ana Castro</p>
+                                        <p class="text-xs text-gray-500">Abogada</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendación 5 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"Excelente experiencia. Los docentes son
+                                    profesionales de primer nivel y el contenido es muy práctico y aplicable."</p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        PM</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Pedro Martínez</p>
+                                        <p class="text-xs text-gray-500">Contador</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendación 6 -->
+                        <div class="carousel-item flex-shrink-0 w-full md:w-1/3 px-4">
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 h-full flex flex-col">
+                                <div class="flex text-yellow-400 mb-3">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                        class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-4 flex-1">"Muy recomendable. La modalidad virtual me
+                                    permitió estudiar a mi ritmo sin descuidar mi trabajo. Los certificados tienen
+                                    validez oficial."</p>
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        SL</div>
+                                    <div>
+                                        <p class="text-sm font-bold text-gray-900">Sandra López</p>
+                                        <p class="text-xs text-gray-500">Psicóloga</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination Dots -->
+                <div class="flex justify-center gap-2 mt-8" id="recomendacionesDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <img src="images/logo-new.png" alt="Logo Footer"
+                        class="h-12 mb-6 object-contain bg-white p-1 rounded">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Comprometidos con la excelencia académica y el desarrollo profesional en el Perú.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Comunidad</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Nosotros</a></li>
+                        <li><a href="#docentes" class="hover:text-white transition">Docentes</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog Académico</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Cursos</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Derecho</a></li>
+                        <li><a href="#" class="hover:text-white transition">Gestión Pública</a></li>
+                        <li><a href="#" class="hover:text-white transition">Ingeniería</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Contacto</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Lima, Perú</li>
+                        <li class="flex items-center"><i class="fas fa-phone w-6"></i> +51 987 654 321</li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> informes@cursos.com</li>
+                    </ul>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 p-2 rounded transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="bg-gray-800 hover:bg-pink-600 p-2 rounded transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="bg-green-500 hover:bg-green-600 p-2 rounded transition"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; 2025 Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            }
+        }
+
+        // Close mobile menu when clicking on anchor links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const menuBtn = document.getElementById('mobile-menu-btn');
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            });
+        });
+    </script>
+
+    <script>
+        // Course data with prices
+        const coursesData = [
+            { id: 'curso-1', name: 'Gestión Pública y Derecho Administrativo', price: 450, image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { id: 'curso-2', name: 'Psicología Forense y Criminalística', price: 480, image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { id: 'curso-3', name: 'Recursos Humanos y Ley del Servicio Civil', price: 420, image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { id: 'curso-4', name: 'Derecho Penal y Procesal Penal', price: 460, image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { id: 'curso-5', name: 'Derecho de Familia y Sucesiones', price: 440, image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
+            { id: 'curso-6', name: 'Criminalística Avanzada', price: 490, image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }
+        ];
+
+        // Function to add course to cart
+        function addToCart(id, name, price, image) {
+            if (window.ShoppingCart) {
+                window.ShoppingCart.addItem({ id, name, price, image });
+            }
+        }
+
+        // Add cart buttons to course cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const courseCards = document.querySelectorAll('#cursosCarousel .carousel-item');
+
+            courseCards.forEach((card, index) => {
+                if (index < coursesData.length) {
+                    const course = coursesData[index];
+                    const contentDiv = card.querySelector('.p-6');
+                    const existingFooter = contentDiv.querySelector('.mt-auto');
+
+                    if (existingFooter) {
+                        // Homepage: Show date and "Inscríbete Ahora" button (adds to cart without showing price)
+                        existingFooter.innerHTML = `
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center text-sm text-gray-500">
+                                    <span><i class="far fa-calendar-alt"></i> Inicio: ${15 + index} Dic</span>
+                                    <span><i class="far fa-clock"></i> 6 meses</span>
+                                </div>
+                                <button onclick="addToCart('${course.id}', '${course.name}', ${course.price}, '${course.image}')"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center gap-2 shadow-md">
+                                    <i class="fas fa-user-plus"></i>
+                                    Inscríbete Ahora
+                                </button>
+                                <a href="curso-detalle.html?id=${course.id}" class="block text-center text-gray-600 hover:text-blue-600 font-medium text-sm transition">
+                                    Ver detalles del curso →
+                                </a>
+                            </div>
+                        `;
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="js/cart.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

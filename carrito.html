@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Aguirre&Asociados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-primary {
+            background-color: #000000;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="images/logo-new.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain logo-clean">
+            </a>
+
+            <nav class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-bold text-gray-200">
+                <a href="index.html" class="hover:text-blue-400 transition">Inicio</a>
+                <a href="cursos.html" class="hover:text-blue-400 transition">Cursos</a>
+                <a href="nosotros.html" class="hover:text-blue-400 transition">Nosotros</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="carrito.html" class="relative text-blue-400">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        0
+                    </span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Content -->
+    <section class="py-12 min-h-screen">
+        <div class="container mx-auto px-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+                <i class="fas fa-shopping-cart mr-3 text-blue-600"></i>Mi Carrito de Compras
+            </h1>
+
+            <!-- Empty Cart Message -->
+            <div id="empty-cart" class="hidden text-center py-20">
+                <i class="fas fa-shopping-cart text-gray-300 text-6xl mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-600 mb-4">Tu carrito está vacío</h2>
+                <p class="text-gray-500 mb-8">¡Explora nuestros cursos y comienza tu aprendizaje!</p>
+                <a href="cursos.html"
+                    class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                    Ver Cursos Disponibles
+                </a>
+            </div>
+
+            <!-- Cart Items -->
+            <div id="cart-content" class="grid lg:grid-cols-3 gap-8">
+                <!-- Cart Items List -->
+                <div class="lg:col-span-2">
+                    <div id="cart-items" class="space-y-4">
+                        <!-- Items will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6">Resumen del Pedido</h3>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between text-gray-600">
+                                <span>Subtotal</span>
+                                <span id="subtotal">S/ 0.00</span>
+                            </div>
+                            <div class="flex justify-between text-gray-600">
+                                <span>Descuento</span>
+                                <span id="discount" class="text-green-600">- S/ 0.00</span>
+                            </div>
+                            <div class="border-t pt-3 flex justify-between text-xl font-bold text-gray-900">
+                                <span>Total</span>
+                                <span id="total">S/ 0.00</span>
+                            </div>
+                        </div>
+
+                        <button onclick="proceedToCheckout()"
+                            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition hover:scale-105">
+                            <i class="fas fa-lock mr-2"></i>Proceder al Pago
+                        </button>
+
+                        <a href="cursos.html"
+                            class="block text-center text-blue-600 hover:text-blue-700 font-semibold mt-4">
+                            <i class="fas fa-arrow-left mr-2"></i>Seguir Comprando
+                        </a>
+
+                        <!-- Security Badges -->
+                        <div class="mt-6 pt-6 border-t">
+                            <p class="text-xs text-gray-500 text-center mb-3">Compra 100% segura</p>
+                            <div class="flex justify-center gap-3 text-gray-400">
+                                <i class="fab fa-cc-visa text-2xl"></i>
+                                <i class="fab fa-cc-mastercard text-2xl"></i>
+                                <i class="fas fa-lock text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">&copy; 2025 Aguirre&Asociados. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script>
+        // Render cart items
+        function renderCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyCart = document.getElementById('empty-cart');
+            const cartContent = document.getElementById('cart-content');
+            const cart = window.ShoppingCart;
+
+            if (cart.items.length === 0) {
+                emptyCart.classList.remove('hidden');
+                cartContent.classList.add('hidden');
+                return;
+            }
+
+            emptyCart.classList.add('hidden');
+            cartContent.classList.remove('hidden');
+
+            cartItemsContainer.innerHTML = cart.items.map(item => `
+                <div class="bg-white rounded-lg shadow-md p-4 flex gap-4">
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-gray-900 mb-2">${item.name}</h3>
+                        <p class="text-blue-600 font-bold text-lg">S/ ${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="flex flex-col items-end justify-between">
+                        <button onclick="removeItem('${item.id}')" class="text-red-600 hover:text-red-700">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity - 1})" 
+                                class="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="w-12 text-center font-bold">${item.quantity}</span>
+                            <button onclick="updateQuantity('${item.id}', ${item.quantity + 1})" 
+                                class="w-8 h-8 bg-gray-200 rounded hover:bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            updateSummary();
+        }
+
+        function updateSummary() {
+            const cart = window.ShoppingCart;
+            const subtotal = cart.getTotal();
+            const discount = 0; // Implement discount logic here
+            const total = subtotal - discount;
+
+            document.getElementById('subtotal').textContent = `S/ ${subtotal.toFixed(2)}`;
+            document.getElementById('discount').textContent = `- S/ ${discount.toFixed(2)}`;
+            document.getElementById('total').textContent = `S/ ${total.toFixed(2)}`;
+        }
+
+        function removeItem(courseId) {
+            window.ShoppingCart.removeItem(courseId);
+            renderCart();
+        }
+
+        function updateQuantity(courseId, quantity) {
+            if (quantity < 1) return;
+            window.ShoppingCart.updateQuantity(courseId, quantity);
+            renderCart();
+        }
+
+        function proceedToCheckout() {
+            if (window.ShoppingCart.items.length === 0) {
+                alert('Tu carrito está vacío');
+                return;
+            }
+            window.location.href = 'checkout.html';
+        }
+
+        // Initialize cart display
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+        });
+    </script>
+</body>
+
+</html>

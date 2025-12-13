@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Aguirre&Asociados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-primary {
+            background-color: #000000;
+        }
+
+        .bg-accent {
+            background-color: #1e3a8a;
+        }
+
+        .text-primary {
+            color: #0f172a;
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="images/logo-new.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain logo-clean">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-bold text-gray-200">
+                <a href="index.html" class="hover:text-blue-400 transition">Inicio</a>
+                <a href="cursos.html" class="hover:text-blue-400 transition">Cursos</a>
+                <a href="nosotros.html" class="text-blue-400">Nosotros</a>
+                <a href="index.html#registro" class="hover:text-blue-400 transition">Inscríbete</a>
+                <a href="index.html#certificacion" class="hover:text-blue-400 transition">Certificación</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <a href="login.html"
+                    class="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-lg">
+                    Mis cursos
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="index.html" class="text-gray-200 hover:text-blue-400 transition py-2">Inicio</a>
+                <a href="cursos.html" class="text-gray-200 hover:text-blue-400 transition py-2">Cursos</a>
+                <a href="nosotros.html" class="text-blue-400 py-2">Nosotros</a>
+                <a href="index.html#registro" class="text-gray-200 hover:text-blue-400 transition py-2">Inscríbete</a>
+                <a href="index.html#certificacion"
+                    class="text-gray-200 hover:text-blue-400 transition py-2">Certificación</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-600 opacity-10 -skew-x-12 transform translate-x-20">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Aguirre<span class="text-blue-400">&</span>Asociados
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-8">
+                    Formación profesional de excelencia en el Perú
+                </p>
+                <div class="w-24 h-1 bg-blue-400 mx-auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Nuestra Historia</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">¿Quiénes Somos?</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Educación" class="rounded-xl shadow-2xl">
+                    </div>
+                    <div>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            <strong>Aguirre&Asociados</strong> es una institución educativa peruana comprometida con la
+                            excelencia académica y el desarrollo profesional continuo. Desde nuestros inicios, hemos
+                            trabajado incansablemente para ofrecer programas de capacitación de alta calidad que
+                            respondan a las necesidades reales del mercado laboral peruano.
+                        </p>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                            Nos especializamos en la formación de profesionales en áreas clave como Derecho, Gestión
+                            Pública, Recursos Humanos, Psicología Forense y Criminalística, brindando certificaciones
+                            con validez nacional que impulsan el crecimiento profesional de nuestros estudiantes.
+                        </p>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Contamos con convenios estratégicos con los principales colegios profesionales del país, lo
+                            que garantiza que nuestros certificados sean reconocidos y valorados en concursos públicos y
+                            procesos de selección en todo el Perú.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misión y Visión -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Misión -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-blue-600">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-bullseye text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900">Nuestra Misión</h3>
+                        </div>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Proporcionar formación profesional de calidad, accesible y actualizada, que permita a
+                            nuestros estudiantes desarrollar competencias sólidas y certificadas para destacar en sus
+                            campos profesionales y contribuir al desarrollo del país.
+                        </p>
+                    </div>
+
+                    <!-- Visión -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 border-t-4 border-red-600">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-eye text-white text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900">Nuestra Visión</h3>
+                        </div>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            Ser la institución educativa líder en el Perú en formación profesional continua, reconocida
+                            por la excelencia de nuestros programas, la calidad de nuestros docentes y el impacto
+                            positivo en la carrera de nuestros egresados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider">Nuestros
+                        Principios</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Valores que nos Definen</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-award text-blue-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Excelencia</h4>
+                        <p class="text-gray-600">
+                            Buscamos la máxima calidad en cada programa, docente y certificación que ofrecemos.
+                        </p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-red-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Compromiso</h4>
+                        <p class="text-gray-600">
+                            Nos comprometemos con el éxito profesional de cada uno de nuestros estudiantes.
+                        </p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-green-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Innovación</h4>
+                        <p class="text-gray-600">
+                            Actualizamos constantemente nuestros contenidos para estar a la vanguardia educativa.
+                        </p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-balance-scale text-purple-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Integridad</h4>
+                        <p class="text-gray-600">
+                            Actuamos con transparencia, honestidad y ética en todas nuestras operaciones.
+                        </p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-yellow-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Inclusión</h4>
+                        <p class="text-gray-600">
+                            Ofrecemos oportunidades de formación accesibles para todos los profesionales del Perú.
+                        </p>
+                    </div>
+
+                    <div class="text-center p-6">
+                        <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-rocket text-indigo-600 text-3xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-3">Resultados</h4>
+                        <p class="text-gray-600">
+                            Nos enfocamos en el impacto real y medible en la carrera de nuestros egresados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="py-20 bg-gradient-to-br from-blue-900 to-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestro Impacto</h2>
+                    <p class="text-gray-200 text-lg">Números que respaldan nuestra trayectoria</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="stat-card text-center">
+                        <div class="text-5xl font-bold text-blue-400 mb-2">5,000+</div>
+                        <p class="text-gray-300 text-lg">Estudiantes Certificados</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-5xl font-bold text-blue-400 mb-2">50+</div>
+                        <p class="text-gray-300 text-lg">Docentes Expertos</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-5xl font-bold text-blue-400 mb-2">25+</div>
+                        <p class="text-gray-300 text-lg">Programas Disponibles</p>
+                    </div>
+                    <div class="stat-card text-center">
+                        <div class="text-5xl font-bold text-blue-400 mb-2">98%</div>
+                        <p class="text-gray-300 text-lg">Satisfacción</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                    ¿Listo para impulsar tu carrera profesional?
+                </h2>
+                <p class="text-gray-600 text-lg mb-8">
+                    Únete a miles de profesionales que han confiado en Aguirre&Asociados para su desarrollo profesional.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="cursos.html"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg shadow-lg font-semibold transition text-center">
+                        Ver Nuestros Cursos
+                    </a>
+                    <a href="index.html#registro"
+                        class="border-2 border-blue-600 hover:bg-blue-600 hover:text-white text-blue-600 px-8 py-4 rounded-lg font-semibold transition text-center">
+                        Inscríbete Ahora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <img src="images/logo-new.png" alt="Logo Footer"
+                        class="h-12 mb-6 object-contain bg-white p-1 rounded">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Comprometidos con la excelencia académica y el desarrollo profesional en el Perú.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Comunidad</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="nosotros.html" class="hover:text-white transition">Nosotros</a></li>
+                        <li><a href="index.html#docentes" class="hover:text-white transition">Docentes</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog Académico</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Cursos</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="cursos.html" class="hover:text-white transition">Derecho</a></li>
+                        <li><a href="cursos.html" class="hover:text-white transition">Gestión Pública</a></li>
+                        <li><a href="cursos.html" class="hover:text-white transition">Ingeniería</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Contacto</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Lima, Perú</li>
+                        <li class="flex items-center"><i class="fas fa-phone w-6"></i> +51 987 654 321</li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> informes@aguirreya.com</li>
+                    </ul>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 p-2 rounded transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="bg-gray-800 hover:bg-pink-600 p-2 rounded transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="bg-green-500 hover:bg-green-600 p-2 rounded transition"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; 2025 Aguirre&Asociados. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            }
+        }
+    </script>
+</body>
+
+</html>

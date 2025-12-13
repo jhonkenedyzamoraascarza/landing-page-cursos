@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Aguirre&Asociados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-primary {
+            background-color: #000000;
+        }
+
+        .course-card {
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="images/logo-new.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain logo-clean">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-bold text-gray-200">
+                <a href="index.html" class="hover:text-blue-400 transition">Inicio</a>
+                <a href="cursos.html" class="text-blue-400">Cursos</a>
+                <a href="nosotros.html" class="hover:text-blue-400 transition">Nosotros</a>
+                <a href="index.html#registro" class="hover:text-blue-400 transition">Inscríbete</a>
+                <a href="index.html#certificacion" class="hover:text-blue-400 transition">Certificación</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <a href="login.html"
+                    class="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-md text-xs sm:text-sm font-bold hover:bg-blue-700 transition shadow-lg">
+                    Mis cursos
+                </a>
+
+                <!-- Shopping Cart Icon -->
+                <a href="carrito.html" class="relative text-white hover:text-blue-400 transition">
+                    <i class="fas fa-shopping-cart text-xl sm:text-2xl"></i>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">
+                        0
+                    </span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white p-2" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-gray-900 border-t border-gray-800">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="index.html" class="text-gray-200 hover:text-blue-400 transition py-2">Inicio</a>
+                <a href="cursos.html" class="text-blue-400 py-2">Cursos</a>
+                <a href="nosotros.html" class="text-gray-200 hover:text-blue-400 transition py-2">Nosotros</a>
+                <a href="index.html#registro" class="text-gray-200 hover:text-blue-400 transition py-2">Inscríbete</a>
+                <a href="index.html#certificacion"
+                    class="text-gray-200 hover:text-blue-400 transition py-2">Certificación</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white py-20 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-blue-600 opacity-10 -skew-x-12 transform translate-x-20">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                    Nuestros <span class="text-blue-400">Cursos</span> y Diplomados
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-8">
+                    Programas de capacitación profesional con certificación válida en todo el Perú
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                        <i class="fas fa-certificate mr-2"></i>Certificación Nacional
+                    </span>
+                    <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Docentes Expertos
+                    </span>
+                    <span class="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                        <i class="fas fa-laptop mr-2"></i>Modalidad Virtual y Presencial
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos de Derecho -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    <i class="fas fa-balance-scale text-blue-600 mr-3"></i>Derecho
+                </h2>
+                <p class="text-gray-600 text-lg">Especialízate en las áreas más demandadas del derecho peruano</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Curso 1 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Gestión Pública y Derecho Administrativo</h3>
+                        <p class="text-gray-600 text-sm mb-4">Domina los aspectos fundamentales del derecho
+                            administrativo y la gestión pública moderna.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>15 Dic 2025</span>
+                            <span><i class="far fa-clock mr-2"></i>120 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 2 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho Penal" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derecho Penal y Procesal Penal</h3>
+                        <p class="text-gray-600 text-sm mb-4">Profundiza en el sistema penal peruano y sus
+                            procedimientos actualizados.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>100 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 3 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho Laboral" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Curso</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derecho Laboral y Seguridad Social</h3>
+                        <p class="text-gray-600 text-sm mb-4">Conoce las últimas actualizaciones en legislación laboral
+                            peruana.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>22 Dic 2025</span>
+                            <span><i class="far fa-clock mr-2"></i>80 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 4 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho Familia" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derecho de Familia y Sucesiones</h3>
+                        <p class="text-gray-600 text-sm mb-4">Especialízate en derecho de familia con enfoque práctico y
+                            actualizado.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>110 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 5 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho Civil" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derecho Civil y Contratos</h3>
+                        <p class="text-gray-600 text-sm mb-4">Domina la teoría y práctica de los contratos en el derecho
+                            civil peruano.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>10 Ene 2026</span>
+                            <span><i class="far fa-clock mr-2"></i>120 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 6 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Derecho Constitucional" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Curso</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Derecho Constitucional y Derechos Humanos</h3>
+                        <p class="text-gray-600 text-sm mb-4">Analiza los fundamentos constitucionales del Estado
+                            peruano.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>90 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos de Gestión y Administración -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    <i class="fas fa-briefcase text-blue-600 mr-3"></i>Gestión y Administración
+                </h2>
+                <p class="text-gray-600 text-lg">Desarrolla competencias en gestión pública y privada</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Curso 7 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="RRHH" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Recursos Humanos y Ley del Servicio Civil</h3>
+                        <p class="text-gray-600 text-sm mb-4">Gestiona el talento humano bajo el marco normativo
+                            peruano.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>20 Dic 2025</span>
+                            <span><i class="far fa-clock mr-2"></i>100 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 8 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Gestión Proyectos" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Curso</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Gestión de Proyectos Públicos</h3>
+                        <p class="text-gray-600 text-sm mb-4">Aprende a gestionar proyectos bajo el sistema
+                            SNIP/Invierte.pe.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>80 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 9 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Contrataciones" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Contrataciones del Estado</h3>
+                        <p class="text-gray-600 text-sm mb-4">Domina la Ley de Contrataciones y sus procedimientos
+                            actualizados.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>5 Ene 2026</span>
+                            <span><i class="far fa-clock mr-2"></i>120 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cursos de Psicología y Criminalística -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    <i class="fas fa-brain text-blue-600 mr-3"></i>Psicología y Criminalística
+                </h2>
+                <p class="text-gray-600 text-lg">Especialízate en ciencias forenses y psicología aplicada</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Curso 10 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Psicología" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Curso</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Psicología Forense y Criminalística</h3>
+                        <p class="text-gray-600 text-sm mb-4">Aplica la psicología en contextos forenses y criminales.
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>90 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 11 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Criminalística" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded">EN
+                            VIVO</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Diplomado</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Criminalística Avanzada</h3>
+                        <p class="text-gray-600 text-sm mb-4">Técnicas modernas de investigación criminal y análisis
+                            forense.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>12 Ene 2026</span>
+                            <span><i class="far fa-clock mr-2"></i>110 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Curso 12 -->
+                <div class="course-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Perfilación" class="w-full h-48 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">VIRTUAL</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-blue-600 font-bold uppercase mb-2 block">Curso</span>
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">Perfilación Criminal</h3>
+                        <p class="text-gray-600 text-sm mb-4">Aprende técnicas de perfilación y análisis de conducta
+                            criminal.</p>
+                        <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                            <span><i class="far fa-calendar-alt mr-2"></i>Inmediato</span>
+                            <span><i class="far fa-clock mr-2"></i>70 horas</span>
+                        </div>
+                        <a href="index.html#registro"
+                            class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition">
+                            Inscríbete Ahora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-blue-900 to-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                    ¿No encuentras el curso que buscas?
+                </h2>
+                <p class="text-gray-200 text-lg mb-8">
+                    Contáctanos y te ayudaremos a encontrar el programa perfecto para tus necesidades profesionales.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html#registro"
+                        class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg shadow-lg font-semibold transition text-center">
+                        Inscríbete Ahora
+                    </a>
+                    <a href="nosotros.html"
+                        class="border-2 border-white hover:bg-white hover:text-blue-900 text-white px-8 py-4 rounded-lg font-semibold transition text-center">
+                        Conoce Más Sobre Nosotros
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <img src="images/logo-new.png" alt="Logo Footer"
+                        class="h-12 mb-6 object-contain bg-white p-1 rounded">
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Comprometidos con la excelencia académica y el desarrollo profesional en el Perú.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Comunidad</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="nosotros.html" class="hover:text-white transition">Nosotros</a></li>
+                        <li><a href="index.html#docentes" class="hover:text-white transition">Docentes</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog Académico</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Cursos</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="cursos.html" class="hover:text-white transition">Derecho</a></li>
+                        <li><a href="cursos.html" class="hover:text-white transition">Gestión Pública</a></li>
+                        <li><a href="cursos.html" class="hover:text-white transition">Psicología</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-lg">Contacto</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt w-6"></i> Lima, Perú</li>
+                        <li class="flex items-center"><i class="fas fa-phone w-6"></i> +51 987 654 321</li>
+                        <li class="flex items-center"><i class="fas fa-envelope w-6"></i> informes@aguirreya.com</li>
+                    </ul>
+                    <div class="flex gap-4 mt-6">
+                        <a href="#" class="bg-gray-800 hover:bg-blue-600 p-2 rounded transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="bg-gray-800 hover:bg-pink-600 p-2 rounded transition"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="bg-green-500 hover:bg-green-600 p-2 rounded transition"><i
+                                class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; 2025 Aguirre&Asociados. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuBtn = document.getElementById('mobile-menu-btn');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-times text-xl"></i>';
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+            }
+        }
+    </script>
+
+    <script src="js/cart.js"></script>
+    <script>
+        const coursesWithPrices = {
+            'Gestión Pública y Derecho Administrativo': 450, 'Derecho Penal y Procesal Penal': 460,
+            'Derecho Laboral y Seguridad Social': 380, 'Derecho de Familia y Sucesiones': 440,
+            'Derecho Civil y Contratos': 470, 'Derecho Constitucional y Derechos Humanos': 390,
+            'Recursos Humanos y Ley del Servicio Civil': 420, 'Gestión de Proyectos Públicos': 410,
+            'Contrataciones del Estado': 480, 'Psicología Forense y Criminalística': 480,
+            'Criminalística Avanzada': 490, 'Perfilación Criminal': 400
+        };
+        function addToCart(id, name, price, image) {
+            if (window.ShoppingCart) window.ShoppingCart.addItem({ id, name, price, image });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.course-card').forEach((card, index) => {
+                const title = card.querySelector('h3').textContent.trim();
+                const price = coursesWithPrices[title] || 400;
+                const image = card.querySelector('img').src;
+                const courseId = 'curso-' + (index + 1);
+                const enrollButton = card.querySelector('a[href*="registro"]');
+                if (enrollButton) {
+                    enrollButton.outerHTML = `<div class="border-t pt-4 mt-4"><div class="flex justify-between items-center mb-3"><span class="text-sm text-gray-500 font-medium">Inversión:</span><span class="text-xl font-bold text-gray-900">S/ ${price}</span></div><button onclick="addToCart('${courseId}', '${title}', ${price}, '${image}')" class="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center gap-2 shadow-md"><i class="fas fa-shopping-cart"></i> Agregar al Carrito</button><a href="curso-detalle.html?id=${courseId}" class="block text-center text-gray-600 hover:text-blue-600 font-medium text-sm mt-3 transition">Ver detalles completos →</a></div>`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

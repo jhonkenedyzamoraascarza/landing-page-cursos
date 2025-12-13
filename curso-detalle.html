@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Curso - Aguirre&Asociados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bg-primary {
+            background-color: #000000;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="images/logo-new.png" alt="Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain">
+            </a>
+
+            <nav class="hidden md:flex space-x-4 lg:space-x-8 text-sm font-bold text-gray-200">
+                <a href="index.html" class="hover:text-blue-400 transition">Inicio</a>
+                <a href="cursos.html" class="hover:text-blue-400 transition">Cursos</a>
+                <a href="nosotros.html" class="hover:text-blue-400 transition">Nosotros</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="login.html"
+                    class="bg-blue-600 text-white px-6 py-3 rounded-md text-sm font-bold hover:bg-blue-700 transition shadow-lg">
+                    Mis cursos
+                </a>
+                <a href="carrito.html" class="relative text-white hover:text-blue-400 transition">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cart-count"
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Course Detail Content -->
+    <section class="py-12">
+        <div class="container mx-auto px-6">
+            <!-- Breadcrumb -->
+            <nav class="text-sm mb-8">
+                <a href="index.html" class="text-blue-600 hover:underline">Inicio</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="cursos.html" class="text-blue-600 hover:underline">Cursos</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600" id="breadcrumb-title">Detalle del Curso</span>
+            </nav>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img id="course-image"
+                            src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                            alt="Curso" class="w-full h-64 md:h-96 object-cover">
+
+                        <div class="p-8">
+                            <span id="course-badge"
+                                class="inline-block bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full mb-4">DIPLOMADO</span>
+                            <h1 id="course-title" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Gestión
+                                Pública y Derecho Administrativo</h1>
+
+                            <div class="flex flex-wrap gap-6 text-sm text-gray-600 mb-6 pb-6 border-b">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar-alt text-blue-600"></i>
+                                    <span id="course-date">Inicio: 15 Dic 2025</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-clock text-blue-600"></i>
+                                    <span id="course-duration">120 horas académicas</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-laptop text-blue-600"></i>
+                                    <span id="course-modality">Virtual y Presencial</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-certificate text-blue-600"></i>
+                                    <span>Certificación Nacional</span>
+                                </div>
+                            </div>
+
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Descripción del Curso</h2>
+                            <div id="course-description" class="text-gray-700 leading-relaxed mb-8">
+                                <p class="mb-4">Este diplomado está diseñado para profesionales que desean
+                                    especializarse en gestión pública y derecho administrativo, proporcionando las
+                                    herramientas necesarias para desempeñarse eficientemente en el sector público
+                                    peruano.</p>
+                                <p class="mb-4">Aprenderás sobre los principios fundamentales del derecho
+                                    administrativo, procedimientos administrativos, contrataciones del estado, y las
+                                    últimas reformas en gestión pública.</p>
+                            </div>
+
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">¿Qué aprenderás?</h2>
+                            <ul id="course-topics" class="space-y-3 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                                    <span class="text-gray-700">Fundamentos del Derecho Administrativo Peruano</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                                    <span class="text-gray-700">Procedimientos Administrativos y Recursos
+                                        Impugnatorios</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                                    <span class="text-gray-700">Contrataciones del Estado y Ley de Compras
+                                        Públicas</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                                    <span class="text-gray-700">Gestión Pública Moderna y Reforma del Estado</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                                    <span class="text-gray-700">Casos Prácticos y Jurisprudencia Actualizada</span>
+                                </li>
+                            </ul>
+
+                            <h2 class="text-2xl font-bold text-gray-900 mb-4">Docentes</h2>
+                            <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                                <p class="text-gray-700">Nuestros docentes son profesionales con amplia experiencia en
+                                    el sector público y privado, con especialización en derecho administrativo y gestión
+                                    pública.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                        <div class="text-center mb-6">
+                            <p class="text-sm text-gray-500 mb-2">Inversión del curso:</p>
+                            <p id="course-price" class="text-4xl font-bold text-gray-900 mb-1">S/ 450</p>
+                            <p class="text-sm text-gray-500">Pago único</p>
+                        </div>
+
+                        <button onclick="buyNow()"
+                            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-lg shadow-lg transform transition hover:scale-105 mb-3">
+                            <i class="fas fa-shopping-bag mr-2"></i>Comprar Ahora
+                        </button>
+
+                        <button onclick="addToCartFromDetail()"
+                            class="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 px-6 rounded-lg transition mb-6">
+                            <i class="fas fa-shopping-cart mr-2"></i>Agregar al Carrito
+                        </button>
+
+                        <div class="border-t pt-6">
+                            <h3 class="font-bold text-gray-900 mb-4">Este curso incluye:</h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-center gap-2">
+                                    <i class="fas fa-check text-green-600"></i>
+                                    <span>Material didáctico completo</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i class="fas fa-check text-green-600"></i>
+                                    <span>Certificado con validez nacional</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i class="fas fa-check text-green-600"></i>
+                                    <span>Acceso a plataforma virtual</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i class="fas fa-check text-green-600"></i>
+                                    <span>Soporte académico permanente</span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <i class="fas fa-check text-green-600"></i>
+                                    <span>Casos prácticos reales</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="border-t mt-6 pt-6">
+                            <p class="text-xs text-gray-500 text-center mb-3">¿Tienes dudas?</p>
+                            <a href="https://wa.me/51987654321" target="_blank"
+                                class="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg transition text-center">
+                                <i class="fab fa-whatsapp mr-2"></i>Contactar por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-primary text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">&copy; 2025 Aguirre&Asociados. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script>
+        // Course data
+        const coursesData = {
+            'curso-1': { name: 'Gestión Pública y Derecho Administrativo', price: 450, image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '120 horas', date: '15 Dic 2025' },
+            'curso-2': { name: 'Psicología Forense y Criminalística', price: 480, image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '110 horas', date: '18 Dic 2025' },
+            'curso-3': { name: 'Recursos Humanos y Ley del Servicio Civil', price: 420, image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '100 horas', date: '20 Dic 2025' },
+            'curso-4': { name: 'Derecho Penal y Procesal Penal', price: 460, image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '100 horas', date: '22 Dic 2025' },
+            'curso-5': { name: 'Derecho de Familia y Sucesiones', price: 440, image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '110 horas', date: '25 Dic 2025' },
+            'curso-6': { name: 'Criminalística Avanzada', price: 490, image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', duration: '110 horas', date: '28 Dic 2025' }
+        };
+
+        // Get course ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('id') || 'curso-1';
+        const course = coursesData[courseId] || coursesData['curso-1'];
+
+        // Populate course details
+        document.getElementById('course-title').textContent = course.name;
+        document.getElementById('breadcrumb-title').textContent = course.name;
+        document.getElementById('course-price').textContent = `S/ ${course.price}`;
+        document.getElementById('course-image').src = course.image;
+        document.getElementById('course-date').textContent = `Inicio: ${course.date}`;
+        document.getElementById('course-duration').textContent = course.duration + ' académicas';
+
+        // Functions
+        function addToCartFromDetail() {
+            if (window.ShoppingCart) {
+                window.ShoppingCart.addItem({
+                    id: courseId,
+                    name: course.name,
+                    price: course.price,
+                    image: course.image
+                });
+            }
+        }
+
+        function buyNow() {
+            addToCartFromDetail();
+            setTimeout(() => {
+                window.location.href = 'carrito.html';
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>
